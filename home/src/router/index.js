@@ -4,7 +4,6 @@ import Router from 'vue-router'
 import Home from '@/pages/home'
 import Nav from '@/pages/nav'
 import Bilibili from '@/pages/bilibili'
-import Live from '@/pages/live'
 import Music from '@/pages/music'
 import News from '@/pages/news'
 import Todo from '@/pages/todo'
@@ -15,7 +14,6 @@ export default new Router({
     routes: [
         {
             path: '/',
-            name: 'home',
             component: Home
         },
         {
@@ -42,11 +40,6 @@ export default new Router({
             path: '/news',
             name: 'news',
             component: News
-        },
-        {
-            path: '/live',
-            name: 'live',
-            component: Live
         },
         {
             path: '/todo',

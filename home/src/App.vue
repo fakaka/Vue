@@ -1,15 +1,20 @@
 <template>
     <div id="app">
-        <el-menu :default-active="activeIndex" class="el-menu" mode="horizontal" @select="handleSelect" router>
-            <el-menu-item index="home"> 主页</el-menu-item>
-            <el-menu-item index="nav">页面导航</el-menu-item>
-            <el-menu-item index="bilibili">哔哩哔哩</el-menu-item>
-            <el-menu-item index="music">音乐</el-menu-item>
-            <el-menu-item index="news">新闻</el-menu-item>
-            <el-menu-item index="live">直播</el-menu-item>
-            <el-menu-item index="todo">TODO</el-menu-item>
-        </el-menu>
-        <router-view></router-view>
+        <el-container>
+            <el-header>
+                <el-menu :default-active="activeIndex" mode="horizontal" router>
+                    <el-menu-item v-for="(item, index) in menuData" :key="index" :index="item.index">
+                        <span slot="title">{{ item.name }}</span>
+                    </el-menu-item>
+                </el-menu>
+            </el-header>
+            <el-main>
+                <keep-alive>
+                    <router-view></router-view>
+                </keep-alive>
+            </el-main>
+            <el-footer></el-footer>
+        </el-container>
     </div>
 </template>
 
@@ -18,12 +23,39 @@ export default {
     name: 'app',
     data() {
         return {
-            activeIndex: 'home'
+            activeIndex: 'home',
+            menuData: [{
+                index: 'home',
+                name: ' 主页'
+            }, {
+                index: 'nav',
+                name: ' 页面导航'
+            }, {
+                index: 'bilibili',
+                name: ' 哔哩哔哩'
+            }, {
+                index: 'music',
+                name: ' 音乐'
+            }, {
+                index: 'news',
+                name: ' 新闻'
+            }, {
+                index: 'todo',
+                name: ' TODO'
+            }]
         }
+    },
+    method: {
+
     }
 }
 </script>
 
 <style lang="less">
-    @import './style/common';
+    @import "./style/common";
+    .el-main {
+      width: 80%;
+      margin: 0 auto;
+      padding-top: 10px;
+    }
 </style>
