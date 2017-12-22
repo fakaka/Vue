@@ -8,11 +8,13 @@
                     </el-menu-item>
                 </el-menu>
             </el-header>
+
             <el-main>
                 <keep-alive>
                     <router-view></router-view>
                 </keep-alive>
             </el-main>
+            
             <el-footer></el-footer>
         </el-container>
     </div>
