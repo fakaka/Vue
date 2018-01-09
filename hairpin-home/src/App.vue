@@ -43,7 +43,7 @@ export default {
                 name: ' 新闻'
             }, {
                 index: 'todo',
-                name: ' TODO'
+                name: ' 待办'
             }]
         }
     },
