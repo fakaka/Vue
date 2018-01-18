@@ -21,11 +21,12 @@
 </template>
 
 <script>
+
 export default {
     name: 'app',
     data() {
         return {
-            activeIndex: 'home',
+            activeIndex: '',
             menuData: [{
                 index: 'home',
                 name: '主页'
@@ -53,6 +54,9 @@ export default {
     },
     method: {
 
+    },
+    mounted() {
+        this.activeIndex = this.$route.name
     }
 }
 </script>
