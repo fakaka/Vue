@@ -28,23 +28,27 @@ export default {
             activeIndex: 'home',
             menuData: [{
                 index: 'home',
-                name: ' 主页'
+                name: '主页'
             }, {
                 index: 'nav',
-                name: ' 页面导航'
+                name: '页面导航'
             }, {
                 index: 'bilibili',
-                name: ' 哔哩哔哩'
+                name: '哔哩哔哩'
             }, {
                 index: 'music',
-                name: ' 音乐'
+                name: '音乐'
             }, {
                 index: 'news',
-                name: ' 新闻'
+                name: '新闻'
             }, {
                 index: 'todo',
-                name: ' 待办'
-            }]
+                name: '待办'
+            }, {
+                index: 'test',
+                name: '测试'
+            }
+            ]
         }
     },
     method: {
