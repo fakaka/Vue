@@ -31,7 +31,7 @@ export default {
                 index: 'home',
                 name: '主页'
             }, {
-                index: 'nav',
+                index: 'search',
                 name: '页面导航'
             }, {
                 index: 'bilibili',
@@ -56,7 +56,7 @@ export default {
 
     },
     mounted() {
-        this.activeIndex = this.$route.name
+        this.activeIndex = this.$route.name || 'home'
     }
 }
 </script>
