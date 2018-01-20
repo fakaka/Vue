@@ -12,6 +12,8 @@ import Test from '@/pages/test'
 Vue.use(Router)
 
 export default new Router({
+    base: '/home/',
+    mode: 'history',
     routes: [
         {
             path: '/',
@@ -52,6 +54,6 @@ export default new Router({
             name: 'test',
             component: Test
         },
-        
+
     ]
 })

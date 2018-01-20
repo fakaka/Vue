@@ -1,15 +1,10 @@
 <template>
     <div>
         <div class="search">
-            <el-input placeholder="请输入内容" v-model="q" class="input-with-select">
-                <el-select v-model="selectEngine" slot="prepend" style="width: 100px;">
-                    <el-option label="百度" value="1">
-                        <span style="float: left; margin-right: 20px;">
-                            <i class="el-icon-warning"></i>
-                        </span>
-                        <span style="color: #8492a6; font-size: 14px">百度</span>
-                    </el-option>
-                    <el-option label="360" value="2"></el-option>
+            <el-input placeholder="请输入关键字" v-model.trim="q" class="input-with-select">
+                <el-select v-model="selectEngine" slot="prepend" style="width: 80px;">
+                    <el-option label="百度" value="1"></el-option>
+                    <el-option label="360 " value="2"></el-option>
                     <el-option label="谷歌" value="3"></el-option>
                 </el-select>
                 <el-button slot="append" icon="el-icon-search" @click="search"></el-button>
@@ -17,16 +12,15 @@
         </div>
 
         <div class="hot">
-            <span>热门词 </span> |
-            <el-button type="text" plain>成功按钮</el-button>
-            <el-button type="text" plain>信息按钮</el-button>
-            <el-button type="text">警告按钮</el-button>
-            <el-button type="text">危险按钮</el-button>
+            <span>热门词 </span> | 
+            <el-button type="text">养生</el-button>
+            <el-button type="text">可怕</el-button>
+            <el-button type="text">震惊</el-button>
         </div>
 
         <div class="like">
             <el-row>
-                <el-col :span="4" v-for="(o, index) in 4" :key="o" :offset="index > 0 ? 2 : 0">
+                <el-col :span="5" v-for="(o, index) in 4" :key="o" :offset="index > 0 ? 1 : 0">
                     <el-card :body-style="{ padding: '0px' }">
                         <img src="../assets/hamburger.png" class="image">
                         <div style="padding: 14px;">
@@ -56,12 +50,12 @@ export default {
         return {
             q: '',
             selectEngine: '百度',
+            hotKeyValue: 'xxx'
         }
     },
     methods: {
         search() {
             let word = this.q
-            word = word.trim()
             if (word == '') {
                 this.$message.warning(' 请输入关键字')
                 return
@@ -85,6 +79,8 @@ export default {
                     break;
             }
         }
+
+
     },
     created() { },
     computed: {},

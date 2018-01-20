@@ -14,15 +14,19 @@
             <el-tab-pane label="我喜欢">
                 <music-list :tableData="tableData2"></music-list>
             </el-tab-pane>
-            <el-tab-pane label="每日推荐">{{ today }} 每日推荐</el-tab-pane>
-            <el-tab-pane label="轻音乐">轻音乐</el-tab-pane>
+            <el-tab-pane label="每日推荐">{{ today }} 每日推荐
+                <music-list :tableData="tableData3"></music-list>
+            </el-tab-pane>
+            <el-tab-pane label="轻音乐">轻音乐
+                <music-list :tableData="tableData4"></music-list>
+            </el-tab-pane>
         </el-tabs>
 
     </div>
 </template>
 
 <script>
-import MusicList from "@/components/music-list";
+import MusicList from "@/components/music-list"
 
 export default {
     name: 'music',
@@ -73,6 +77,22 @@ export default {
                     duration: '03:34',
                     singer: '岑宁儿'
                 }],
+            tableData3: [
+                {
+                    date: '--',
+                    name: '天真',
+                    duration: '03:58',
+                    singer: '李艺彤'
+                }
+            ],
+            tableData4: [
+                {
+                    date: '--',
+                    name: 'II quiet romance (杀人考察(前))',
+                    duration: '02:26',
+                    singer: '梶浦由記'
+                }
+            ],
             today: new Date().getDate()
         }
     },
