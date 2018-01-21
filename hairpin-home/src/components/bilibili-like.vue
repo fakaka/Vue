@@ -109,9 +109,6 @@ export default {
 </script>
 
 <style scoped>
-    .like {
-      /* position: static; */
-    }
 
     .card {
       position: relative;

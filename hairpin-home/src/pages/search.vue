@@ -1,11 +1,11 @@
 <template>
     <div>
         <div class="search">
-            <el-input placeholder="请输入关键字" v-model.trim="q" class="input-with-select">
+            <el-input placeholder="请输入关键字" v-model.trim="q" class="input-with-select" :clearable="true" :autofocus="true">
                 <el-select v-model="selectEngine" slot="prepend" style="width: 80px;">
-                    <el-option label="百度" value="1"></el-option>
-                    <el-option label="360 " value="2"></el-option>
-                    <el-option label="谷歌" value="3"></el-option>
+                    <el-option value="1" label="百度"></el-option>
+                    <el-option value="2" label="360"></el-option>
+                    <el-option value="3" label="谷歌"></el-option>
                 </el-select>
                 <el-button slot="append" icon="el-icon-search" @click="search"></el-button>
             </el-input>
@@ -18,27 +18,12 @@
             <el-button type="text">震惊</el-button>
             <a href="">66</a>
         </div>
-
-        <div class="like">
-            <el-row>
-                <el-col class="card" :span="5" v-for="(o, index) in 4" :key="o" :offset="index > 0 ? 1 : 0">
-                    <el-card :body-style="{ padding: '0px' }">
-                        <img src="../assets/hamburger.png" class="image">
-                        <div style="padding: 14px;">
-                            <span>好吃的汉堡</span>
-                            <div class="bottom clearfix">
-                                <el-button type="text" class="button">操作按钮</el-button>
-                            </div>
-                        </div>
-                    </el-card>
-                </el-col>
-            </el-row>
-
-        </div>
+        <nav-grid></nav-grid>
     </div>
 </template>
 
 <script>
+import NavGrid from "@/components/nav-grid"
 
 export default {
     name: 'search',
@@ -75,14 +60,12 @@ export default {
                     this.$message.error('错了哦，这是一条错误消息')
                     break;
             }
-        }
-
-
+        },
     },
     created() { },
     computed: {},
     components: {
-
+        NavGrid
     }
 }
 </script>
@@ -126,6 +109,6 @@ export default {
     }
 
     .el-card:hover {
-      box-shadow: 0 2px 5px 3px rgba(0,0,0,.1);
+      box-shadow: 0 2px 5px 3px rgba(0, 0, 0, 0.1);
     }
 </style>
