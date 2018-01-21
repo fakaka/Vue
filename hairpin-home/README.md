@@ -1,5 +1,9 @@
-# home
+# hairpin-home
 
-> A Vue.js project
+> 个人主页
 
+## TODO
 
+- [ ] 使用 vuex
+    - [ ] todo 存储在vuex里
+- [ ] 

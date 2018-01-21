@@ -28,7 +28,7 @@ export default {
         return {
             activeIndex: '',
             menuData: [{
-                index: 'home',
+                index: '/',
                 name: '主页'
             }, {
                 index: 'search',

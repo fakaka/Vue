@@ -12,15 +12,16 @@
         </div>
 
         <div class="hot">
-            <span>热门词 </span> | 
+            <span>热门词 </span> |
             <el-button type="text">养生</el-button>
             <el-button type="text">可怕</el-button>
             <el-button type="text">震惊</el-button>
+            <a href="">66</a>
         </div>
 
         <div class="like">
             <el-row>
-                <el-col :span="5" v-for="(o, index) in 4" :key="o" :offset="index > 0 ? 1 : 0">
+                <el-col class="card" :span="5" v-for="(o, index) in 4" :key="o" :offset="index > 0 ? 1 : 0">
                     <el-card :body-style="{ padding: '0px' }">
                         <img src="../assets/hamburger.png" class="image">
                         <div style="padding: 14px;">
@@ -38,10 +39,6 @@
 </template>
 
 <script>
-
-function aaa() {
-    console.log('22')
-}
 
 export default {
     name: 'search',
@@ -126,5 +123,9 @@ export default {
 
     .clearfix:after {
       clear: both;
+    }
+
+    .el-card:hover {
+      box-shadow: 0 2px 5px 3px rgba(0,0,0,.1);
     }
 </style>
