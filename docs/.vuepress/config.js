@@ -9,7 +9,7 @@ module.exports = {
     port: 3005,
     serviceWorker: true,
     themeConfig: {
-        repo: 'vuejs/vuepress',
+        repo: 'fakaka/Vue',
         docsDir: 'docs',
         nav: [
             {
@@ -17,15 +17,11 @@ module.exports = {
                 link: '/guide/'
             },
             {
-                text: 'Config Reference',
-                link: '/config/'
+                text: '学习笔记',
+                link: '/note/'
             },
             {
-                text: 'Default Theme Config',
-                link: '/default-theme-config/'
-            },
-            {
-                text: 'Data',
+                text: 'API',
                 link: '/data/'
             }
         ],

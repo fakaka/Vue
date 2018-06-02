@@ -13,15 +13,9 @@ features:
 footer: MIT Licensed | Copyright © 2018 Hairpin
 ---
 
-### As Easy as 1, 2, 3
+### 像数 1, 2, 3 一样容易
 
 ``` bash
-# install
-yarn global add vuepress # OR npm install -g vuepress
-
-# create a markdown file
-echo '# Hello VuePress' > README.md
-
 # start writing
 vuepress dev
 
