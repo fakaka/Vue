@@ -12,7 +12,7 @@
     "dependencies": {
         "vue": "^2.5.2",
         "vue-router": "^3.0.1",
-        "muse-ui": "*",
+        "element-ui": "^2.4.1",
         "vue-scroller": "^2.2.4"
     },
     "devDependencies": {

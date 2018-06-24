@@ -1,7 +1,30 @@
 <template>
-    <div class="info-container">
-        <scroller :on-refresh="refresh" :on-infinite="infinite" ref="my_scroller">
-            <el-card v-for="(item, index) in items" :key="index" class="row">
+    <div>
+        <mu-appbar style="width: 100%;"
+                   color="primary">
+            <mu-button icon
+                       slot="left">
+                <mu-icon value="menu"></mu-icon>
+            </mu-button>
+            消息
+            <mu-button flat
+                       slot="right">
+                <mu-icon value="autorenew"></mu-icon>
+            </mu-button>
+        </mu-appbar>
+        <scroller :on-refresh="refresh"
+                  :on-infinite="infinite"
+                  class="info-container"
+                  ref="my_scroller">
+            <el-card v-for="(item, index) in items"
+                     :key="index"
+                     class="info-card">
+                <div slot="header"
+                     class="clearfix">
+                    <span>卡片名称</span>
+                    <el-button style="float: right; padding: 3px 0"
+                               type="text">操作按钮</el-button>
+                </div>
                 {{ item }}
             </el-card>
         </scroller>
@@ -43,7 +66,7 @@ export default {
                 console.log(n)
                 if (n > 1) {
                     self.$refs.my_scroller.finishInfinite(true)
-                }else{
+                } else {
                     done()
                 }
             }, 1500)
@@ -62,14 +85,22 @@ export default {
 </script>
 
 <style scoped>
-    .aaaa {
+    .info-container {
+        margin-top: 56px;
+    }
+    .clearfix:before,
+    .clearfix:after {
+        display: table;
+        content: '';
+    }
+    .clearfix:after {
+        clear: both;
+    }
+
+    .info-card {
         width: 100%;
         max-width: 400px;
-        float: left;
-        margin: 5px 0;
-    }
-    li {
-        /* height: 50px; */
+        margin: 0 0 5px 0;
     }
 </style>
 
