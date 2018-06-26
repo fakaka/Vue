@@ -1,44 +1,61 @@
 <template>
     <div>
-        <mu-appbar style="width: 100%;"
-                   color="primary">
-            <mu-button icon
-                       slot="left">
-                <mu-icon value="menu"></mu-icon>
-            </mu-button>
-            消息
-            <mu-button flat
-                       slot="right">
-                <mu-icon value="autorenew"></mu-icon>
-            </mu-button>
-        </mu-appbar>
-        <scroller :on-refresh="refresh"
-                  :on-infinite="infinite"
-                  class="info-container"
-                  ref="my_scroller">
-            <el-card v-for="(item, index) in items"
-                     :key="index"
-                     class="info-card">
-                <div slot="header"
-                     class="clearfix">
-                    <span>卡片名称</span>
-                    <el-button style="float: right; padding: 3px 0"
-                               type="text">操作按钮</el-button>
-                </div>
-                {{ item }}
-            </el-card>
-        </scroller>
+        <mu-paper :z-depth="1"
+                  class="demo-loadmore-wrap">
+            <mu-appbar color="teal">
+                <mu-button icon
+                           slot="left">
+                    <mu-icon value="menu"></mu-icon>
+                </mu-button>
+                LoadMore
+                <mu-button icon
+                           slot="right"
+                           @click="refresh()">
+                    <mu-icon value="refresh"></mu-icon>
+                </mu-button>
+            </mu-appbar>
+            <mu-container ref="container"
+                          class="demo-loadmore-content">
+                <mu-load-more @refresh="refresh"
+                              :refreshing="refreshing"
+                              :loading="loading"
+                              :loaded-all="true"
+                              @load="load">
+                    <mu-list>
+                        <info-card v-for="(item, index) in num"
+                                   :key="index"
+                                   :item="{num:item}"></info-card>
+                    </mu-list>
+                </mu-load-more>
+            </mu-container>
+        </mu-paper>
+        <mu-container class="bottom-nav">
+            <mu-bottom-nav>
+                <mu-bottom-nav-item title="Recents"
+                                    icon="restore"></mu-bottom-nav-item>
+                <mu-bottom-nav-item title="Favorites"
+                                    icon="favorite"></mu-bottom-nav-item>
+                <mu-bottom-nav-item title="Nearby"
+                                    icon="location_on"></mu-bottom-nav-item>
+            </mu-bottom-nav>
+        </mu-container>
     </div>
 </template>
 
 <script>
+import InfoCard from '@/components/info-card'
+
 var n = 0
 export default {
     name: 'home',
     props: {},
     data() {
         return {
-            items: []
+            items: [],
+            num: 5,
+            refreshing: false,
+            loading: false,
+            text: 'List'
         }
     },
     methods: {
@@ -70,6 +87,22 @@ export default {
                     done()
                 }
             }, 1500)
+        },
+        refresh() {
+            this.refreshing = true
+            this.$refs.container.scrollTop = 0
+            setTimeout(() => {
+                this.refreshing = false
+                this.text = this.text === 'List' ? 'Menu' : 'List'
+                this.num = 10
+            }, 2000)
+        },
+        load() {
+            this.loading = true
+            setTimeout(() => {
+                this.loading = false
+                this.num += 10
+            }, 2000)
         }
     },
     mounted() {
@@ -80,13 +113,21 @@ export default {
         this.bottom = 20
     },
     computed: {},
-    components: {}
+    components: {
+        InfoCard
+    }
 }
 </script>
 
 <style scoped>
     .info-container {
         margin-top: 56px;
+        margin-bottom: 50px;
+    }
+    @media only screen and (min-width: 600px) {
+        .info-container {
+            margin-top: 64px;
+        }
     }
     .clearfix:before,
     .clearfix:after {
@@ -102,10 +143,19 @@ export default {
         max-width: 400px;
         margin: 0 0 5px 0;
     }
+
+    .bottom-nav {
+        position: fixed;
+        bottom: 0;
+    }
+
+    .demo-loadmore-wrap {
+        margin-bottom: 52px;
+    }
 </style>
 
 <style>
-    .info-item .el-card__body {
-        padding: 15px;
+    .container {
+        padding: 0;
     }
 </style>
