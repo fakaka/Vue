@@ -3,22 +3,26 @@
         <el-card class="info-card">
             <div slot="header"
                  class="card-header clearfix">
-                <span>微博消息</span>
+                <span>微博消息 {{ item.num }}</span>
+                {{read}}
                 <el-button @click="changeRead"
                            style="float: right; padding: 3px 0"
                            type="text">标为已读</el-button>
             </div>
             <div class="card-content">
-                你好{{ item.num }} {{read}}
-                <br>
-                <br>
-                <br>
-                <br>
                 <bilibili-like :likeData="likeData"
                                v-if="item.num == 1"></bilibili-like>
             </div>
             <div class="card-footer">
-                我是底部
+                <div style="flex-grow:1">
+                    <i class="el-icon-edit"></i>
+                </div>
+                <div style="flex-grow:1">
+                    <i class="el-icon-delete"></i>
+                </div>
+                <div style="flex-grow:1">
+                    <i class="el-icon-share"></i>
+                </div>
             </div>
         </el-card>
     </div>
@@ -79,6 +83,14 @@ export default {
         max-width: 400px;
         margin: 0 0 5px 0;
     }
+    .card-footer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        /* margin-top: 5px;
+        border-top: 1px solid #ebeef5;
+        padding: 5px; */
+    }
 </style>
 
 <style>
@@ -87,5 +99,6 @@ export default {
     }
     .el-card__body {
         padding: 15px;
+        padding-bottom: 10px;
     }
 </style>

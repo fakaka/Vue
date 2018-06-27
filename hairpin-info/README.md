@@ -18,4 +18,25 @@ npm run build
 npm run build --report
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## TODO
+
+- [ ] 页面的基本布局
+- [ ] 重新写 card 组件（模仿 el-card ）
+    - [ ] 原生样式
+    - [ ] 增加底部 slot 区域
+- [ ] 页面信息展示
+    - [ ] 文字
+    - [ ] 图片
+        - [ ] 单图
+        - [ ] 多图
+    - [ ] 视频
+    - [ ] 转发类型
+        - [ ] 文字
+        - [ ] 图片
+        - [ ] 视频
+- [ ] 页面信息详细页面
+    - [ ] 图片展示
+- [ ] 真实数据
+    - [ ] 获取数据
+    - [ ] 已读
+    - [ ] 

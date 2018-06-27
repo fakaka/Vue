@@ -1,18 +1,30 @@
 <template>
     <div class="card">
-        <div class="user-head" :style="'background-image: url(' + imgData.user.head_url + ');'"></div>
         <div class="main-content">
-            <p class="user-name">
-                <span class="c-pointer">{{ imgData.user.name }}</span>
-            </p>
-            <p class="time">
-                <a :href="'http://h.bilibili.com/' + imgData.item.id" target="_blank" class="detail-link">{{ imgData.item.upload_time | formatDate('YY-MM-DD') }}</a>
-            </p>
+            <div class="user-info">
+                <div class="user-head"
+                     :style="'background-image: url(' + imgData.user.head_url + ');'"></div>
+                <div class="user-name">
+                    <span class="c-pointer">{{ imgData.user.name }}</span>
+                </div>
+                <p class="time">
+                    <a :href="'http://h.bilibili.com/' + imgData.item.id"
+                       target="_blank"
+                       class="detail-link">{{ imgData.item.upload_time | formatDate('YY-MM-DD') }}</a>
+                </p>
+            </div>
             <div class="card-content">
                 <div class="description">{{ imgData.item.description }}</div>
-                <div class="imagesbox" v-if="imgData.item.pictures">
+                <div class="imagesbox"
+                     v-if="imgData.item.pictures.length == 1">
+                    <img :src="imgData.item.pictures[0].img_src"
+                         width="200">
+                </div>
+                <div v-else-if="imgData.item.pictures > 1">
                     <ul class="img-list">
-                        <li class="img-card" v-for="(item, index) in imgData.item.pictures" :key="index">
+                        <li class="img-card"
+                            v-for="(item, index) in imgData.item.pictures"
+                            :key="index">
                             <img :src="item.img_src + '@104w_104h_1e_1c.webp'">
                         </li>
                     </ul>
@@ -23,7 +35,6 @@
 </template>
 
 <script>
-
 export default {
     name: 'bilibili-like-image',
     props: {
@@ -32,8 +43,7 @@ export default {
         }
     },
     data() {
-        return {
-        }
+        return {}
     },
     methods: {
         getDynamicId(str) {
@@ -43,9 +53,8 @@ export default {
             return res
         }
     },
-    created() { },
-    computed: {
-    },
+    created() {},
+    computed: {},
     filters: {
         formatDate(val) {
             val = parseInt(val + '000')
@@ -59,39 +68,37 @@ export default {
             return year + '-' + month + '-' + day + ' ' + hour + ':' + minutes + ':' + seconds
         }
     },
-    components: {
-
-    }
+    components: {}
 }
 </script>
 
 <style scoped>
     .imagesbox {
-      width: 521px;
-      text-align: center;
-      border: 1px solid #e6e5ef;
-      border-radius: 6px;
+        width: 521px;
+        /* text-align: center; */
+        /* border: 1px solid #e6e5ef; */
+        border-radius: 6px;
     }
 
     .imagesbox .img-list {
-      line-height: 0;
-      text-align: left;
-      vertical-align: top;
-      margin: 0;
-      padding: 5px;
+        line-height: 0;
+        text-align: left;
+        vertical-align: top;
+        margin: 0;
+        padding: 5px;
     }
 
     .imagesbox .img-list .img-card {
-      display: inline-block;
-      width: 104px;
-      height: 104px;
-      vertical-align: top;
-      overflow: hidden;
-      border-radius: 6px;
-      position: relative;
-      margin: 5px 11px;
+        display: inline-block;
+        width: 104px;
+        height: 104px;
+        vertical-align: top;
+        overflow: hidden;
+        border-radius: 6px;
+        position: relative;
+        margin: 5px 11px;
     }
     .imagesbox .img-list .img-card:hover {
-      box-shadow: 0 0 4px rgba(0, 160, 214, 0.7);
+        box-shadow: 0 0 4px rgba(0, 160, 214, 0.7);
     }
 </style>

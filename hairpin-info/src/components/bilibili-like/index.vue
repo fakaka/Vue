@@ -1,24 +1,24 @@
 <template>
     <div>
-        <bilibili-like-repost :repostData="likeData"
-                              v-if="likeData.type.type == 1"></bilibili-like-repost>
-        <bilibili-like-image :imgData="likeData"
-                             v-if="likeData.type.type == 2"></bilibili-like-image>
-        <bilibili-like-text :imgData="likeData"
-                            v-if="likeData.type.type == 4"></bilibili-like-text>
-        <bilibili-like-video :videoData="likeData"
-                             v-if="likeData.type.type == 8"></bilibili-like-video>
-        <bilibili-like-vc-video :videoData="likeData"
-                                v-if="likeData.type.type == 16"></bilibili-like-vc-video>
+        <card-repost :repostData="likeData"
+                     v-if="likeData.type.type == 1"></card-repost>
+        <card-image :imgData="likeData"
+                    v-if="likeData.type.type == 2"></card-image>
+        <card-text :imgData="likeData"
+                   v-if="likeData.type.type == 4"></card-text>
+        <card-video :videoData="likeData"
+                    v-if="likeData.type.type == 8"></card-video>
+        <card-vc-video :videoData="likeData"
+                       v-if="likeData.type.type == 16"></card-vc-video>
     </div>
 </template>
 
 <script>
-import bilibiliLikeImage from './bilibili-like/image'
-import bilibiliLikeText from './bilibili-like/text'
-import bilibiliLikeVideo from './bilibili-like/video'
-import bilibiliLikeVcVideo from './bilibili-like/vc-video'
-import bilibiliLikeRepost from './bilibili-like/repost'
+import CardImage from './image'
+import CardText from './text'
+import CardVideo from './video'
+import CardVcVideo from './vc-video'
+import CardRepost from './repost'
 
 /**
  * desc.type
@@ -72,11 +72,11 @@ export default {
         }
     },
     components: {
-        bilibiliLikeImage,
-        bilibiliLikeText,
-        bilibiliLikeVideo,
-        bilibiliLikeVcVideo,
-        bilibiliLikeRepost
+        CardImage,
+        CardText,
+        CardVideo,
+        CardVcVideo,
+        CardRepost
     }
 }
 </script>
@@ -84,16 +84,11 @@ export default {
 <style>
     .card {
         position: relative;
-        width: 638px;
-        background: #fff;
-        border: 1px solid rgba(40, 158, 255, 0.5);
-        margin-top: 10px;
-        border-radius: 8px;
-    }
-    .card .main-content {
-        width: 534px;
-        padding-top: 20px;
-        margin-left: 88px;
+        /* width: 638px; */
+        /* background: #fff; */
+        /* border: 1px solid rgba(40, 158, 255, 0.5); */
+        /* margin-top: 10px; */
+        /* border-radius: 8px; */
     }
     .card .main-content .user-name {
         font-size: 16px;
@@ -116,7 +111,7 @@ export default {
         color: #ff85ad;
     }
     .card .user-head {
-        position: absolute;
+        /* position: absolute; */
         width: 48px;
         height: 48px;
         top: 20px;
@@ -182,8 +177,8 @@ export default {
     }
 
     .card-content {
-        margin-top: 5px;
-        padding-bottom: 12px;
+        /* margin-top: 5px; */
+        /* padding-bottom: 5px; */
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
     }
