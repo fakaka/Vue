@@ -90,28 +90,32 @@ export default {
         /* margin-top: 10px; */
         /* border-radius: 8px; */
     }
-    .card .main-content .user-name {
+    .main-content .user-name {
+        display: inline-block;
+        width: 90px;
         font-size: 16px;
         letter-spacing: 0;
         color: #222;
     }
-    .card .main-content .user-name span:hover {
+    .main-content .user-name span:hover {
         color: #00b5e5;
     }
-    .card .main-content .time {
+    .main-content .time {
+        display: inline-block;
         padding-top: 4px;
         font-size: 12px;
     }
-    .card .main-content .time .detail-link {
+    .main-content .time .detail-link {
         color: #23ade5;
         -webkit-transition: color 0.3s ease;
         transition: color 0.3s ease;
     }
-    .card .main-content .time .detail-link:hover {
+    .main-content .time .detail-link:hover {
         color: #ff85ad;
     }
     .card .user-head {
         /* position: absolute; */
+        display: inline-block;
         width: 48px;
         height: 48px;
         top: 20px;
@@ -183,17 +187,17 @@ export default {
         box-sizing: border-box;
     }
     .description {
+        display: inline-block;
         max-width: 100%;
         max-height: 88px;
+        line-height: 22px;
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
         text-align: justify;
-        display: inline-block;
-        margin-bottom: 5px;
+        /* margin-bottom: 5px; */
         font-size: 14px;
-        line-height: 22px;
         word-wrap: break-word;
         cursor: pointer;
         color: #222;

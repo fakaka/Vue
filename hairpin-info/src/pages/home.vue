@@ -22,9 +22,9 @@
                               :loaded-all="true"
                               @load="load">
                     <mu-list>
-                        <info-card v-for="(item, index) in num"
+                        <info-card v-for="(item, index) in likeDatas"
                                    :key="index"
-                                   :item="{num:item}"></info-card>
+                                   :item="item"></info-card>
                     </mu-list>
                 </mu-load-more>
             </mu-container>
@@ -35,7 +35,7 @@
                                     icon="restore"></mu-bottom-nav-item>
                 <mu-bottom-nav-item title="Favorites"
                                     icon="favorite"></mu-bottom-nav-item>
-                <mu-bottom-nav-item title="Nearby"
+                <mu-bottom-nav-item title="设置"
                                     icon="location_on"></mu-bottom-nav-item>
             </mu-bottom-nav>
         </mu-container>
@@ -45,7 +45,9 @@
 <script>
 import InfoCard from '@/components/info-card'
 
+var baseUrl = 'http://localhost:3003/bilibili'
 var n = 0
+
 export default {
     name: 'home',
     props: {},
@@ -55,7 +57,8 @@ export default {
             num: 5,
             refreshing: false,
             loading: false,
-            text: 'List'
+            text: 'List',
+            likeDatas: []
         }
     },
     methods: {
@@ -103,6 +106,21 @@ export default {
                 this.loading = false
                 this.num += 10
             }, 2000)
+        },
+        _getLikeData(uid = '259333') {
+            this.$http.get(baseUrl + '/user/space?uid=' + uid).then(resp => {
+                // console.log(resp.body)
+                if (resp.body.code == 0) {
+                    for (let index = 0; index < resp.body.data.cards.length; index++) {
+                        const element = resp.body.data.cards[index];
+                        var card = element.card
+                        var cardData = JSON.parse(card)
+                        cardData.type = element.desc
+                        console.log(cardData)
+                        this.likeDatas.push(cardData)
+                    }
+                }
+            })
         }
     },
     mounted() {
@@ -111,6 +129,8 @@ export default {
         }
         this.top = 1
         this.bottom = 20
+
+        this._getLikeData()
     },
     computed: {},
     components: {
@@ -136,12 +156,6 @@ export default {
     }
     .clearfix:after {
         clear: both;
-    }
-
-    .info-card {
-        width: 100%;
-        max-width: 400px;
-        margin: 0 0 5px 0;
     }
 
     .bottom-nav {
