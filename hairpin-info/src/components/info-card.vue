@@ -9,14 +9,11 @@
             <bilibili-like :likeData="item"></bilibili-like>
         </div>
         <div class="info-card__footer">
-            <div style="flex-grow:1">
-                <i class="el-icon-edit"></i>
+            <div><i class="el-icon-edit"></i>
             </div>
-            <div style="flex-grow:1">
-                <i class="el-icon-share"></i>
+            <div > <i class="el-icon-share"></i>
             </div>
-            <div style="flex-grow:1">
-                <i class="el-icon-delete"></i>
+            <div><i class="el-icon-delete"></i>
             </div>
         </div>
     </div>
@@ -89,5 +86,10 @@ export default {
         border-top: 1px solid #ebeef5;
         box-sizing: border-box;
         padding: 5px; 
+    }
+
+    .info-card__footer>div{
+        flex-grow:1;
+        text-align: center;
     }
 </style>
