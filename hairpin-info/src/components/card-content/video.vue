@@ -1,6 +1,5 @@
 <template>
-    <div class="main-content card">
-        <div class="user-info">
+    <!-- <div class="user-info">
             <div class="user-head"
                  :style="'background-image: url(' + videoData.owner.face + ');'"></div>
             <p class="user-name">
@@ -13,36 +12,39 @@
                     <span>{{ videoData.pubdate | formatDate }}</span>
                 </a>
             </p>
-        </div>
-        <div class="card-content">
-            <div class="description"></div>
-            <div class="video-container">
-                <a target="_blank"
-                   :href="'https://www.bilibili.com/video/av' + videoData.aid">
-                    <div class="image-area"><img :src="videoData.pic"></div>
-                    <div class="text-area">
-                        <div class="title">{{ videoData.title}}</div>
-                        <!-- <div class="content">{{ videoData.desc }}</div> -->
-                        <div class="view-danmaku">
-                            <div>
-                                <i class="icon-font icon-play-a"></i>
-                                <span class="view">播放 {{ videoData.stat.view }}</span>
-                            </div>
-                            <div>
-                                <i class="icon-font icon-danmu-a"></i>
-                                <span class="danmaku">弹幕 {{ videoData.stat.danmaku }}</span>
-                            </div>
+        </div> -->
+    <div class="card-content">
+        <div class="video-container">
+            <a target="_blank"
+               :href="'https://www.bilibili.com/video/av' + videoData.aid">
+                <div class="image-area"><img :src="videoData.pic"></div>
+                <div class="text-area">
+                    <div class="title">{{ videoData.title}}</div>
+                    <!-- <div class="content">{{ videoData.desc }}</div> -->
+                    <div class="view-danmaku">
+                        <div>
+                            <i class="icon-font icon-play-a"></i>
+                            <span class="view">播放 {{ videoData.stat.view }}</span>
+                        </div>
+                        <div>
+                            <i class="icon-font icon-danmu-a"></i>
+                            <span class="danmaku">弹幕 {{ videoData.stat.danmaku }}</span>
                         </div>
                     </div>
-                </a>
-            </div>
+                </div>
+            </a>
+        </div>
+        <div class="vc-video" v-if="videoData.type.type == 16">
+            <video :src="videoData.item.video_playurl"
+                   controls="controls"
+                   height="400"></video>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'bilibili-like',
+    name: 'card-content-video',
     props: {
         videoData: {
             type: Object

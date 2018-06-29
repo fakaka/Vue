@@ -1,41 +1,24 @@
 <template>
-    <div class="main-content card">
-        <div class="user-info">
-            <div class="user-head"
-                    :style="'background-image: url(' + imgData.user.head_url + ');'"></div>
-            <div class="user-name">
-                <span class="c-pointer">{{ imgData.user.name }}</span>
-            </div>
-            <p class="time">
-                <a :href="'http://h.bilibili.com/' + imgData.item.id"
-                    target="_blank"
-                    class="detail-link">{{ imgData.item.upload_time | formatDate('YY-MM-DD') }}</a>
-            </p>
-        </div>
-        <div class="card-content">
-            <div class="description">{{ imgData.item.description }}</div>
-            <div class="imagesbox"
-                    v-if="imgData.item.pictures.length == 1">
-                <img :src="imgData.item.pictures[0].img_src"
-                        width="200">
-            </div>
-            <div v-else-if="imgData.item.pictures.length > 1"
-                    class="imagesbox">
-                <ul class="img-list">
-                    <li class="img-card"
-                        v-for="(item, index) in imgData.item.pictures"
-                        :key="index">
-                        <img :src="item.img_src + '@104w_104h_1e_1c.webp'">
-                    </li>
-                </ul>
-            </div>
+    <div>
+        <div class="imagesbox">
+            <img v-if="imgData.item.pictures.length == 1"
+                 :src="imgData.item.pictures[0].img_src"
+                 width="200">
+            <ul class="img-list"
+                v-else-if="imgData.item.pictures.length > 1">
+                <li class="img-card"
+                    v-for="(item, index) in imgData.item.pictures"
+                    :key="index">
+                    <img :src="item.img_src + '@104w_104h_1e_1c.webp'">
+                </li>
+            </ul>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'bilibili-like-image',
+    name: 'card-content-image',
     props: {
         imgData: {
             type: Object

@@ -1,15 +1,29 @@
 <template>
     <div class="info-card">
         <div class="info-card__header clearfix">
-            <span>微博消息</span>
-            {{read}}
-            <el-button @click="changeRead"
-                       style="float: right; padding: 3px 0"
-                       type="text">标为已读</el-button>
+            <div class="user-head"
+                 :style="'background-image: url(' + (item.user.head_url) + ');'"></div>
+            <div style="width: 230px; padding-left: 8px;">
+                <div class="user-name">
+                    <span class="c-pointer">{{ item.user.name }}</span>
+                </div>
+                <div class="publish-time">
+                    <a :href="'http://h.bilibili.com/' + item.item.id"
+                       target="_blank"
+                       class="detail-link">{{ item.item.upload_time | formatDate('YY-MM-DD') }}</a>
+                </div>
+            </div>
+            <div class="card-oper">
+                <el-button @click="changeRead"
+                           style="float: right;"
+                           type="text">{{read}} 标为已读</el-button>
+            </div>
         </div>
+
         <div class="info-card__body">
-            <bilibili-like :likeData="item"></bilibili-like>
+            <card-content :likeData="item"></card-content>
         </div>
+
         <div class="info-card__footer">
             <div>
                 <i class="el-icon-edit"></i>
@@ -25,7 +39,7 @@
 </template>
 
 <script>
-import BilibiliLike from '@/components/bilibili-like'
+import CardContent from '@/components/card-content'
 
 export default {
     name: 'info-card',
@@ -49,8 +63,21 @@ export default {
     },
     mounted() {},
     computed: {},
+    filters: {
+        formatDate(val) {
+            val = parseInt(val + '000')
+            var d = new Date(val)
+            var year = d.getFullYear()
+            var month = d.getMonth() + 1
+            var day = d.getDate() < 10 ? '0' + d.getDate() : '' + d.getDate()
+            var hour = d.getHours()
+            var minutes = d.getMinutes()
+            var seconds = d.getSeconds()
+            return year + '-' + month + '-' + day + ' ' + hour + ':' + minutes + ':' + seconds
+        }
+    },
     components: {
-        BilibiliLike
+        CardContent
     }
 }
 </script>
@@ -76,13 +103,14 @@ export default {
     }
 
     .info-card__header {
-        padding: 10px 15px;
+        padding: 10px 10px 8px;
         border-bottom: 1px solid #ebeef5;
         box-sizing: border-box;
+        display: flex;
     }
 
     .info-card__body {
-        padding: 15px;
+        padding: 10px 13px;
     }
 
     .info-card__footer {
@@ -99,5 +127,43 @@ export default {
         text-align: center;
         padding-top: 5px;
         padding-bottom: 5px;
+    }
+
+    .user-name {
+        padding-top: 1px;
+        font-size: 13px;
+        font-weight: bolder;
+        color: #ff85ad;
+        letter-spacing: 0;
+    }
+
+    .publish-time {
+        display: inline-block;
+        padding-top: 1px;
+        font-size: 12px;
+    }
+    .publish-time .detail-link {
+        color: #23ade5;
+        -webkit-transition: color 0.3s ease;
+        transition: color 0.3s ease;
+    }
+    .publish-time .detail-link:hover {
+        color: #ff85ad;
+    }
+    .user-head {
+        /* position: absolute; */
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        top: 20px;
+        left: 24px;
+        border-radius: 50%;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        cursor: pointer;
+    }
+    .card-oper {
+        line-height: 44px;
     }
 </style>

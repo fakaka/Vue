@@ -2,7 +2,7 @@
     <div>
         <mu-paper :z-depth="1"
                   class="demo-loadmore-wrap">
-            <mu-appbar color="teal">
+            <mu-appbar color="primary">
                 <mu-button icon
                            slot="left">
                     <mu-icon value="menu"></mu-icon>
@@ -25,6 +25,9 @@
                         <info-card v-for="(item, index) in likeDatas"
                                    :key="index"
                                    :item="item"></info-card>
+                        <div v-if="likeDatas == null || likeDatas.length == 0">
+                            暂无数据
+                        </div>
                     </mu-list>
                 </mu-load-more>
             </mu-container>
@@ -112,7 +115,10 @@ export default {
                 // console.log(resp.body)
                 if (resp.body.code == 0) {
                     for (let index = 0; index < resp.body.data.cards.length; index++) {
-                        const element = resp.body.data.cards[index];
+                        if (index > 5) {
+                            // break
+                        }
+                        const element = resp.body.data.cards[index]
                         var card = element.card
                         var cardData = JSON.parse(card)
                         cardData.type = element.desc
