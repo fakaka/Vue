@@ -47,7 +47,7 @@
 
 <script>
 import InfoCard from '@/components/info-card'
-import { getLikeInfo }  from '@/api/api'
+import { getLikeInfo } from '@/api/api'
 
 var n = 0
 
@@ -73,8 +73,6 @@ export default {
                     self.items.splice(0, 0, i + ' - keep walking, be 2 with you.')
                 }
                 self.top = self.top - 10
-                // done()
-                self.$refs.my_scroller.finishInfinite()
             }, 1500)
         },
         infinite: function(done) {
@@ -95,13 +93,7 @@ export default {
             }, 1500)
         },
         refresh() {
-            this.refreshing = true
-            this.$refs.container.scrollTop = 0
-            setTimeout(() => {
-                this.refreshing = false
-                this.text = this.text === 'List' ? 'Menu' : 'List'
-                this.num = 10
-            }, 2000)
+            this._getLikeData()
         },
         load() {
             this.loading = true

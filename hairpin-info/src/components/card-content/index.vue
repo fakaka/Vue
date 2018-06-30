@@ -1,20 +1,22 @@
 <template>
     <div class="card-content">
-        <div class="description">{{ likeData.item ? likeData.item.description : '' }}</div>
+        <div class="description">{{ likeData.item.description }}</div>
 
         <card-repost :repostData="likeData"
-                     v-if="likeData.type.type == 1"></card-repost>
+                     v-if="likeData.desc.type == 1"></card-repost>
         <card-image :imgData="likeData"
-                    v-if="likeData.type.type == 2"></card-image>
+                    v-if="likeData.desc.type == 2"></card-image>
         <card-video :videoData="likeData"
-                    v-if="likeData.type.type == 8 || likeData.type.type == 16"></card-video>
+                    v-if="likeData.desc.type == 8 || likeData.desc.type == 16"></card-video>
+        <card-music :musicData="likeData"
+                    v-if="likeData.desc.type == 32"></card-music>
     </div>
 </template>
 
 <script>
 import CardImage from './image'
 import CardVideo from './video'
-// import CardVcVideo from './vc-video'
+import CardMusic from './music'
 import CardRepost from './repost'
 
 /**
@@ -44,7 +46,7 @@ export default {
     components: {
         CardImage,
         CardVideo,
-        // CardVcVideo,
+        CardMusic,
         CardRepost
     }
 }

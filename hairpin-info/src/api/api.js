@@ -6,22 +6,15 @@ var baseUrl = 'http://localhost:3003/bilibili'
 export function getLikeInfo(uid) {
     return new Promise((resolve, reject) => {
         var likeDatas = []
-        const url = baseUrl + '/user/space?uid=' + uid
+        const url = 'http://localhost:3003/info/list'
         const data = {}
         Vue.http.get(url).then(
             resp => {
-                // console.log(resp.body)
+                console.log(resp.body)
                 if (resp.body.code == 0) {
                     for (let index = 0; index < resp.body.data.cards.length; index++) {
-                        if (index > 5) {
-                            // break
-                        }
                         const element = resp.body.data.cards[index]
-                        var card = element.card
-                        var cardData = JSON.parse(card)
-                        cardData.type = element.desc
-                        console.log(cardData)
-                        likeDatas.push(cardData)
+                        likeDatas.push(element)
                     }
                     resolve(likeDatas)
                 } else {

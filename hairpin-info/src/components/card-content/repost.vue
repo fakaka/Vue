@@ -1,76 +1,57 @@
 <template>
-    <div class="main-content card">
-        <div class="user-info">
-            <div class="user-head"
-                 :style="'background-image: url(' + repostData.user.face + ');'"></div>
-            <p class="user-name">
-                <span class="c-pointer">{{ repostData.user.uname }}</span>
-            </p>
-            <p class="time">
-                <a :href="'http://h.bilibili.com/' + repostData.item.id"
+    <div class="post-content repost">
+
+        <div class="album"
+             v-if="repostData.type.orig_type == 2">
+            <div class="original-poster">
+                <a :href="'//space.bilibili.com/'+ originData.user.uid +'/#/dynamic'"
                    target="_blank"
-                   class="detail-link">
-                    {{ repostData.item.timestamp | formatDate('YY-MM-DD') }}
-                </a>
-            </p>
-        </div>
-        <div class="card-content">
-            <div class="description">{{ repostData.item.content }}</div>
-            <div class="post-content repost">
-
-                <div class="album"
-                     v-if="repostData.type.orig_type == 2">
-                    <div class="original-poster">
-                        <a :href="'//space.bilibili.com/'+ originData.user.uid +'/#/dynamic'"
-                           target="_blank"
-                           class="username">@ {{ originData.user.name }}:</a>
-                    </div>
-                    <div class="description">
-                        <a href="">
-                            {{ originData.item.description }}
-                        </a>
-                    </div>
-                    <div class="imagesbox">
-                        <ul class="img-list">
-                            <li class="img-card"
-                                v-for="(item, index ) in originData.item.pictures"
-                                :key="index">
-                                <img :src="item.img_src + '@104w_104h_1e_1c.webp'">
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div v-if="repostData.type.orig_type == 4">
-                    <div class="description">{{ originData.item.content }}</div>
-                </div>
-
-                <div class="video-container"
-                     v-if="repostData.type.orig_type == 8">
-                    <a target="_blank"
-                       :href="'https://www.bilibili.com/video/av' + originData.aid">
-                        <div class="image-area"><img :src="originData.pic"></div>
-                        <div class="text-area">
-                            <div class="title">{{ originData.title}}</div>
-                            <div class="content">{{ originData.desc }}</div>
-                            <div class="view-danmaku">
-                                <div>
-                                    <i class="icon-font icon-play-a"></i>
-                                    <span class="view">播放 {{ originData.stat.view }}</span>
-                                </div>
-                                <div>
-                                    <i class="icon-font icon-danmu-a"></i>
-                                    <span class="danmaku">弹幕 {{ originData.stat.danmaku }}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div v-if="repostData.type.orig_type == 64">
-                    <div class="description">暂时不支持文章</div>
-                </div>
+                   class="username">@ {{ originData.user.name }}:</a>
             </div>
+            <div class="description">
+                <a href="">
+                    {{ originData.item.description }}
+                </a>
+            </div>
+            <div class="imagesbox">
+                <ul class="img-list">
+                    <li class="img-card"
+                        v-for="(item, index ) in originData.item.pictures"
+                        :key="index">
+                        <img :src="item.img_src + '@104w_104h_1e_1c.webp'">
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div v-if="repostData.type.orig_type == 4">
+            <div class="description">{{ originData.item.content }}</div>
+        </div>
+
+        <div class="video-container"
+             v-if="repostData.type.orig_type == 8">
+            <a target="_blank"
+               :href="'https://www.bilibili.com/video/av' + originData.aid">
+                <div class="image-area"><img :src="originData.pic"></div>
+                <div class="text-area">
+                    <div class="title">{{ originData.title}}</div>
+                    <div class="content">{{ originData.desc }}</div>
+                    <div class="view-danmaku">
+                        <div>
+                            <i class="icon-font icon-play-a"></i>
+                            <span class="view">播放 {{ originData.stat.view }}</span>
+                        </div>
+                        <div>
+                            <i class="icon-font icon-danmu-a"></i>
+                            <span class="danmaku">弹幕 {{ originData.stat.danmaku }}</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div v-if="repostData.type.orig_type == 64">
+            <div class="description">暂时不支持文章</div>
         </div>
     </div>
 </template>

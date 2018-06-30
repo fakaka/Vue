@@ -8,15 +8,15 @@
                     <span class="c-pointer">{{ item.user.name }}</span>
                 </div>
                 <div class="publish-time">
-                    <a :href="'http://h.bilibili.com/' + item.item.id"
+                    <a :href="item.item.url"
                        target="_blank"
-                       class="detail-link">{{ item.item.upload_time | formatDate('YY-MM-DD') }}</a>
+                       class="detail-link">{{ item.item.public_time | formatDate('YY-MM-DD') }}</a>
                 </div>
             </div>
             <div class="card-oper">
                 <el-button @click="changeRead"
                            style="float: right;"
-                           type="text">{{read}} 标为已读</el-button>
+                           type="text">{{ readText }}</el-button>
             </div>
         </div>
 
@@ -62,10 +62,21 @@ export default {
         }
     },
     mounted() {},
-    computed: {},
+    computed: {
+        readText() {
+            if (this.read) {
+                return '已读'
+            }else{
+                return '未读'
+            }
+        }
+    },
     filters: {
-        formatDate(val) {
-            val = parseInt(val + '000')
+        formatDate(value) {
+            var val = parseInt(value + '000')
+            if (!val || val < 1000000) {
+                return value
+            }
             var d = new Date(val)
             var year = d.getFullYear()
             var month = d.getMonth() + 1

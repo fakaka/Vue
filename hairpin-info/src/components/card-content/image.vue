@@ -1,11 +1,11 @@
 <template>
     <div>
-        <div class="imagesbox">
-            <img v-if="imgData.item.pictures.length == 1"
+        <div class="image-container">
+            <img v-if="imgData.item.pictures_count == 1"
                  :src="imgData.item.pictures[0].img_src"
                  width="200">
             <ul class="img-list"
-                v-else-if="imgData.item.pictures.length > 1">
+                v-else-if="imgData.item.pictures_count > 1">
                 <li class="img-card"
                     v-for="(item, index) in imgData.item.pictures"
                     :key="index">
@@ -55,14 +55,14 @@ export default {
 </script>
 
 <style scoped>
-    .imagesbox {
-        /* width: 521px; */
+    .image-container {
+        width: 100%;
         /* text-align: center; */
         /* border: 1px solid #e6e5ef; */
         /* border-radius: 6px; */
     }
 
-    .imagesbox .img-list {
+    .image-container .img-list {
         line-height: 0;
         text-align: left;
         vertical-align: top;
@@ -70,7 +70,7 @@ export default {
         /* padding: 5px; */
     }
 
-    .imagesbox .img-list .img-card {
+    .image-container .img-list .img-card {
         position: relative;
         display: inline-block;
         width: 104px;
@@ -80,7 +80,7 @@ export default {
         margin: 0 10px 10px 0;
         border-radius: 3px;
     }
-    .imagesbox .img-list .img-card:hover {
+    .image-container .img-list .img-card:hover {
         box-shadow: 0 0 4px rgba(0, 160, 214, 0.7);
     }
 </style>
