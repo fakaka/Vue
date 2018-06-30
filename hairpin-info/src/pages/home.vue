@@ -47,8 +47,8 @@
 
 <script>
 import InfoCard from '@/components/info-card'
+import { getLikeInfo }  from '@/api/api'
 
-var baseUrl = 'http://localhost:3003/bilibili'
 var n = 0
 
 export default {
@@ -110,22 +110,10 @@ export default {
                 this.num += 10
             }, 2000)
         },
-        _getLikeData(uid = '259333') {
-            this.$http.get(baseUrl + '/user/space?uid=' + uid).then(resp => {
-                // console.log(resp.body)
-                if (resp.body.code == 0) {
-                    for (let index = 0; index < resp.body.data.cards.length; index++) {
-                        if (index > 5) {
-                            // break
-                        }
-                        const element = resp.body.data.cards[index]
-                        var card = element.card
-                        var cardData = JSON.parse(card)
-                        cardData.type = element.desc
-                        console.log(cardData)
-                        this.likeDatas.push(cardData)
-                    }
-                }
+        _getLikeData() {
+            getLikeInfo('259333').then(data => {
+                // console.log(data)
+                this.likeDatas = data
             })
         }
     },
