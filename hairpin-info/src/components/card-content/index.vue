@@ -1,17 +1,3 @@
-<template>
-    <div class="card-content">
-        <div class="description">{{ likeData.item.description }}</div>
-
-        <card-repost :repostData="likeData"
-                     v-if="likeData.desc.type == 1"></card-repost>
-        <card-image :imgData="likeData"
-                    v-if="likeData.desc.type == 2"></card-image>
-        <card-video :videoData="likeData"
-                    v-if="likeData.desc.type == 8 || likeData.desc.type == 16"></card-video>
-        <card-music :musicData="likeData"
-                    v-if="likeData.desc.type == 32"></card-music>
-    </div>
-</template>
 
 <script>
 import CardImage from './image'
@@ -48,6 +34,22 @@ export default {
         CardVideo,
         CardMusic,
         CardRepost
+    },
+    render(h) {
+        let temp = (
+            <div class="card-content">
+                <div class="description">{this.likeData.item.description}</div>
+            </div>
+        )
+        let type = this.likeData.desc.type
+        if (type == 2) {
+            temp.children.push(<card-image imgData={this.likeData} />)
+        }
+        if (type == 8) {
+            temp.children.push(<card-video videoData={this.likeData} />)
+        }
+
+        return temp
     }
 }
 </script>
