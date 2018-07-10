@@ -1,12 +1,13 @@
 // api
 import Vue from 'vue'
 
-var baseUrl = 'http://localhost:3003/bilibili'
+// var baseUrl = 'http://localhost:3003/bilibili'
+var baseUrl = 'http://10.21.39.67:3003'
 
 export function getLikeInfo(uid) {
     return new Promise((resolve, reject) => {
         var likeDatas = []
-        const url = 'http://localhost:3003/info/list'
+        const url = baseUrl + '/info/list'
         const data = {}
         Vue.http.get(url).then(
             resp => {
