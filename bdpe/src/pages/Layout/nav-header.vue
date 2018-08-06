@@ -1,37 +1,25 @@
 <template>
     <div class="nav-header">
-        <!-- <a href="/hairpin-admin/home"> -->
-            <!-- <img class="logo"
-                 src="../../assets/logo.png"
-                 alt="logo"
-                 title="首页"
-                 height="50px">  -->
-        <!-- </a> -->
-        <!-- <img src="../../assets/logo.png"
-             alt=""
-             width="20"> -->
+        <div class="logo">
+            <a href="/hairpin-admin/home">
+                <img src="../../assets/logo.png"
+                     alt="logo"
+                     title="首页"
+                     height="60">
+            </a>
+        </div>
         <el-menu :default-active="activeIndex"
-                 class="el-menu-demo"
+                 background-color="#eef1f6"
+                 style="flex-grow: 2"
                  mode="horizontal"
                  @select="handleSelect">
-            <el-menu-item index="1">处理中心</el-menu-item>
-            <el-submenu index="2">
-                <template slot="title">我的工作台</template>
-                <el-menu-item index="2-1">选项1</el-menu-item>
-                <el-menu-item index="2-2">选项2</el-menu-item>
-                <el-menu-item index="2-3">选项3</el-menu-item>
-                <el-submenu index="2-4">
-                    <template slot="title">选项4</template>
-                    <el-menu-item index="2-4-1">选项1</el-menu-item>
-                    <el-menu-item index="2-4-2">选项2</el-menu-item>
-                    <el-menu-item index="2-4-3">选项3</el-menu-item>
-                </el-submenu>
-            </el-submenu>
-            <el-menu-item index="3"
-                          disabled>消息中心</el-menu-item>
-            <el-menu-item index="4">
+            <el-menu-item index="1">任务调度</el-menu-item>
+            <el-menu-item index="2">数据质量</el-menu-item>
+            <el-menu-item index="3">元数据</el-menu-item>
+            <el-menu-item index="4">系统设置</el-menu-item>
+            <el-menu-item index="5">
                 <a href="https://www.ele.me"
-                   target="_blank">订单管理</a>
+                   target="_blank">饿了么</a>
             </el-menu-item>
         </el-menu>
         <div class="msg-btn">
@@ -78,14 +66,19 @@ export default {
 </script>
 
 <style scoped>
+    .nav-header {
+        display: flex;
+    }
     .logo {
-        position: absolute;
-        left: 5px;
+        display: inline-block;
+        line-height: 60px;
+        height: 60px;
+        margin-right: 120px;
     }
     .msg-btn {
         position: relative;
         display: inline-block;
-        line-height: 32px;
+        /* line-height: 32px; */
         margin-right: 10px;
     }
 
@@ -94,5 +87,10 @@ export default {
     }
     .el-dropdown-menu {
         padding: 10px 0 5px;
+    }
+
+    .el-menu--horizontal {
+        border-right: none;
+        border: 0;
     }
 </style>

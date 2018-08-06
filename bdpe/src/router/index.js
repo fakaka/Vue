@@ -5,6 +5,8 @@ import NotFound from '@/pages/404'
 import Login from '@/pages/login'
 import Layout from '@/pages/Layout/layout'
 
+import Job from '@/pages/job'
+
 // 管理模块
 import Home from '@/pages/Home'
 import User from '@/pages/user'
@@ -39,6 +41,7 @@ var router = new Router({
             name: '登录',
             component: Login
         },
+
         {
             path: '/admin',
             component: Layout,
@@ -51,6 +54,10 @@ var router = new Router({
                     path: '/home',
                     name: '主页',
                     component: Home
+                },
+                {
+                    path: '/job',
+                    component: Job
                 },
                 {
                     path: '/user',

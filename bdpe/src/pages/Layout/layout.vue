@@ -3,20 +3,11 @@
         <el-header>
             <nav-header></nav-header>
         </el-header>
-        <el-container>
-            <nav-side></nav-side>
-            <div style="flex: 1;">
-                <breadcrumb></breadcrumb>
-                <el-main>
-                    <!-- <transition name="el-fade-in-linear"> -->
-                    <transition>
-                        <keep-alive>
-                            <router-view></router-view>
-                        </keep-alive>
-                    </transition>
-                </el-main>
-            </div>
-        </el-container>
+        <el-main>
+            <keep-alive>
+                <router-view></router-view>
+            </keep-alive>
+        </el-main>
     </el-container>
 </template>
 
@@ -44,12 +35,14 @@ export default {
 
 <style scoped>
     .el-header {
-        text-align: right;
+        /* text-align: right; */
         font-size: 12px;
         background-color: #eef1f6;
         color: #333;
         height: 60px;
         line-height: 60px;
+        overflow: hidden;
+        /* border-bottom: 1px solid #000; */
     }
 </style>
 
