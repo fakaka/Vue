@@ -1,10 +1,11 @@
 <template>
-    <div style="width:200px">
+    <div class="location">
         <el-input placeholder="输入关键字进行过滤"
                   v-model="filterText">
         </el-input>
-        <el-tree :data="treeData"
-                 :props="defaultProps"
+        <el-tree :props="defaultProps"
+                 :load="loadNode1"
+                 lazy
                  ref="tree2"
                  :filter-node-method="filterNode">
         </el-tree>
@@ -18,57 +19,9 @@ export default {
     props: {},
     data() {
         return {
-            treeData: [
-                {
-                    label: '省经',
-                    children: [
-                        {
-                            label: '我的临时任务',
-                            children: [
-                                {
-                                    label: '鼓楼区'
-                                },
-                                {
-                                    label: '玄武区'
-                                },
-                                {
-                                    label: '秦淮区'
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    label: '接口',
-                    children: [
-                        {
-                            label: 'Sdasdd',
-                            children: [
-                                {
-                                    label: '三级 2-1-1'
-                                }
-                            ]
-                        },
-                        {
-                            label: '二级 2-2',
-                            children: [
-                                {
-                                    label: '三级 2-2-1'
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    label: '一经'
-                },
-                {
-                    label: '位置'
-                }
-            ],
             defaultProps: {
-                children: 'children',
-                label: 'label'
+                children: 'zones',
+                isLeaf: 'leaf'
             },
             filterText: ''
         }
@@ -82,6 +35,51 @@ export default {
         filterNode(value, data) {
             if (!value) return true
             return data.label.indexOf(value) !== -1
+        },
+        loadNode1(node, resolve) {
+            if (node.level === 0) {
+                return resolve([
+                    {
+                        label: '省经'
+                    },
+                    {
+                        label: '接口'
+                    },
+                    {
+                        label: '一经'
+                    },
+                    {
+                        label: '位置'
+                    }
+                ])
+            }
+            if (node.level > 1) return resolve([])
+
+            setTimeout(() => {
+                let data = [
+                    {
+                        label: 'leaf',
+                        leaf: true
+                    },
+                    {
+                        label: 'zone'
+                    }
+                ]
+                if (node.data.label == '省经') {
+                    data = [
+                        {
+                            label: '精准营销',
+                            leaf: true
+                        },
+                        {
+                            label: '导出格式化',
+                            leaf: true
+                        }
+                    ]
+                }
+
+                resolve(data)
+            }, 500)
         }
     },
     created() {},
@@ -90,5 +88,10 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+    .location {
+        display: inline-block;
+        width: 200px;
+        height: 100%;
+    }
 </style>

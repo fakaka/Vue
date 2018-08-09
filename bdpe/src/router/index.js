@@ -8,11 +8,8 @@ import Layout from '@/pages/Layout/layout'
 import Job from '@/pages/job'
 
 // 管理模块
-import Home from '@/pages/Home'
-import User from '@/pages/user'
-import Song from '@/pages/song'
+import Show from '@/pages/show'
 import Blog from '@/pages/blog'
-import Task from '@/pages/crontask'
 
 // API
 import Weibo from '@/pages/weibo'
@@ -47,27 +44,13 @@ var router = new Router({
             component: Layout,
             children: [
                 {
-                    path: '',
-                    component: Home
-                },
-                {
-                    path: '/home',
-                    name: '主页',
-                    component: Home
-                },
-                {
                     path: '/job',
                     component: Job
                 },
                 {
-                    path: '/user',
-                    name: '用户管理',
-                    component: User
-                },
-                {
-                    path: '/song',
+                    path: '/show',
                     name: '歌曲管理',
-                    component: Song
+                    component: Show
                 },
                 {
                     path: '/blog',
@@ -78,11 +61,6 @@ var router = new Router({
                     path: '/weibo',
                     name: '微博管理',
                     component: Weibo
-                },
-                {
-                    path: '/task',
-                    name: '定时任务',
-                    component: Task
                 },
                 {
                     path: '/doc',

@@ -2,17 +2,28 @@
     <div class="app-container">
         <!-- <nav-side></nav-side> -->
         <el-tabs :tab-position="'left'">
-            <el-tab-pane label="调度设计">
-                <user></user>
+            <el-tab-pane label="流程设计">
+                <job-design></job-design>
             </el-tab-pane>
             <el-tab-pane label="调度配置">
                 <location></location>
             </el-tab-pane>
-            <el-tab-pane label="调度管理" style="display:flex">
-                <location></location>
-                <weibo></weibo>
+            <el-tab-pane label="流程管理">
+                <el-col :span="4">
+                    <location></location>
+                </el-col>
+                <el-col :span="20">
+                    <weibo></weibo>
+                </el-col>
             </el-tab-pane>
-            <el-tab-pane label="调度监控">定时任务补偿</el-tab-pane>
+            <el-tab-pane label="流程监控">
+                <el-col :span="4">
+                    <location></location>
+                </el-col>
+                <el-col :span="20">
+                    <job-monitor></job-monitor>
+                </el-col>
+            </el-tab-pane>
             <el-tab-pane label="集群监控">定时任务补偿</el-tab-pane>
             <el-tab-pane label="日志管理">定时任务补偿</el-tab-pane>
         </el-tabs>
@@ -21,9 +32,10 @@
 
 <script>
 import NavSide from './Layout/nav-side'
-import User from '@/pages/user'
+import JobDesign from '@/pages/job-design'
 import Location from '@/pages/location'
 import Weibo from '@/pages/weibo'
+import JobMonitor from '@/pages/job-monitor'
 
 export default {
     name: 'job',
@@ -37,9 +49,10 @@ export default {
     computed: {},
     components: {
         NavSide,
-        User,
+        JobDesign,
         Location,
-        Weibo
+        Weibo,
+        JobMonitor
     }
 }
 </script>

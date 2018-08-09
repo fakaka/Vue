@@ -1,13 +1,18 @@
 <template>
-    <div class="app-container">
-        <test></test>
-        <github></github>
-    </div>
+    <el-container>
+        <el-aside>
+            <nav-side></nav-side>
+        </el-aside>
+        <el-main>
+            <test></test>
+        </el-main>
+    </el-container>
 </template>
 
 <script>
 import Test from '@/pages/test'
 import Github from '@/components/github'
+import NavSide from './Layout/nav-side'
 
 export default {
     name: 'home',
@@ -43,7 +48,8 @@ export default {
     computed: {},
     components: {
         Github,
-        Test
+        Test,
+        NavSide
     }
 }
 </script>
