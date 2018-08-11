@@ -24,7 +24,9 @@
                     <job-monitor></job-monitor>
                 </el-col>
             </el-tab-pane>
-            <el-tab-pane label="集群监控">定时任务补偿</el-tab-pane>
+            <el-tab-pane label="集群监控">
+                <clu-monitor></clu-monitor>
+            </el-tab-pane>
             <el-tab-pane label="日志管理">定时任务补偿</el-tab-pane>
         </el-tabs>
     </div>
@@ -36,6 +38,7 @@ import JobDesign from '@/pages/job-design'
 import Location from '@/pages/location'
 import Weibo from '@/pages/weibo'
 import JobMonitor from '@/pages/job-monitor'
+import CluMonitor from '@/pages/clu-monitor'
 
 export default {
     name: 'job',
@@ -52,7 +55,8 @@ export default {
         JobDesign,
         Location,
         Weibo,
-        JobMonitor
+        JobMonitor,
+        CluMonitor
     }
 }
 </script>

@@ -6,10 +6,10 @@ import Login from '@/pages/login'
 import Layout from '@/pages/Layout/layout'
 
 import Job from '@/pages/job'
+import MetaData from '@/pages/meta-data'
 
 // 管理模块
 import Show from '@/pages/show'
-import Blog from '@/pages/blog'
 
 // API
 import Weibo from '@/pages/weibo'
@@ -44,6 +44,10 @@ var router = new Router({
             component: Layout,
             children: [
                 {
+                    path: '/home',
+                    component: Show
+                },
+                {
                     path: '/job',
                     component: Job
                 },
@@ -53,9 +57,9 @@ var router = new Router({
                     component: Show
                 },
                 {
-                    path: '/blog',
-                    name: '博客管理',
-                    component: Blog
+                    path: '/meta',
+                    name: '元数据',
+                    component: MetaData
                 },
                 {
                     path: '/weibo',

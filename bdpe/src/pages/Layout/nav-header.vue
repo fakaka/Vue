@@ -8,16 +8,15 @@
                      height="60">
             </a>
         </div>
-        <el-menu :default-active="activeIndex"
-                 background-color="#eef1f6"
+        <el-menu background-color="#eef1f6"
                  style="flex-grow: 2"
                  mode="horizontal"
                  :activeIndex="activeIndex"
                  router>
             <el-menu-item index="job">任务调度</el-menu-item>
             <el-menu-item index="2">数据质量</el-menu-item>
-            <el-menu-item index="3">元数据</el-menu-item>
-            <el-menu-item index="4">系统设置</el-menu-item>
+            <el-menu-item index="meta">元数据</el-menu-item>
+            <el-menu-item index="setting">系统设置</el-menu-item>
             <el-menu-item index="show">展示页面</el-menu-item>
         </el-menu>
         <div class="msg-btn">

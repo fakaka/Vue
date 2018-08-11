@@ -1,16 +1,11 @@
 <template>
-    <el-container>
-        <el-aside>
-            <nav-side></nav-side>
-        </el-aside>
-        <el-main>
-            <test></test>
-        </el-main>
-    </el-container>
+    <div>
+        <chart></chart>
+    </div>
 </template>
 
 <script>
-import Test from '@/pages/test'
+import Chart from '@/pages/chart'
 import Github from '@/components/github'
 import NavSide from './Layout/nav-side'
 
@@ -48,7 +43,7 @@ export default {
     computed: {},
     components: {
         Github,
-        Test,
+        Chart,
         NavSide
     }
 }

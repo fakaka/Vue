@@ -52,7 +52,7 @@ export default {
             if (this.devMode) {
                 localStorage.setItem('isLogin', true)
                 this.loading = false
-                this.$router.push('/home')
+                this.$router.push('/job')
                 return
             }
             this.$http
@@ -63,7 +63,7 @@ export default {
                         if (resp.body.data) {
                             localStorage.setItem('isLogin', true)
                             console.log('token: ', resp.body.data)
-                            this.$router.push('/home')
+                            this.$router.push('/job')
                         } else {
                             this.$message({
                                 title: 'login',
