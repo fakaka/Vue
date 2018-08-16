@@ -1,120 +1,157 @@
 <template>
-    <div>
-        流程设计页面
+    <div class="panel-body points demo flow_chart"
+         id="points">
     </div>
-
 </template>
 
 <script>
-import DisplayTable from '@/components/display-table'
+import $ from 'jquery'
+import { jsPlumb } from 'jsplumb'
+
+require('../assets/css/demo.css')
+require('../assets/css/jsplumb.css')
 
 export default {
-    name: 'job-design',
-    props: {},
+    name: 'Index',
     data() {
         return {
-            score: 0,
-            form: {
-                item: '',
-                name: '',
-                score: 0,
-                createTime: ''
-            },
-            items: null,
-            pickerOptions1: {
-                disabledDate(time) {
-                    return time.getTime() > Date.now()
-                },
-                shortcuts: [
+            data: {
+                point: [
                     {
-                        text: '今天',
-                        onClick(picker) {
-                            picker.$emit('pick', new Date())
-                        }
+                        _id: '58c21d713819d56d68763918',
+                        name: 'start',
+                        status: '0',
+                        anchor: 'Right'
                     },
                     {
-                        text: '昨天',
-                        onClick(picker) {
-                            const date = new Date()
-                            date.setTime(date.getTime() - 3600 * 1000 * 24)
-                            picker.$emit('pick', date)
-                        }
+                        _id: '58c21d803819d56d68763919',
+                        name: 'scan',
+                        status: '1'
+                    },
+                    {
+                        _id: '58c21da83819d56d6876391a',
+                        name: 'ftp',
+                        status: '0'
+                    },
+                    {
+                        _id: '58c63ecf3819d5a22f2c7f2e14',
+                        name: 'hdfs',
+                        status: '1'
+                    },
+                    {
+                        _id: '58c63ecf3819d5a22f2c7fwqe24',
+                        name: 'end',
+                        status: '1'
                     }
+                ],
+                location: [
+                    ['start', 10, 14],
+                    ['scan', 20, 14],
+                    ['ftp', 30, 14],
+                    ['hdfs', 40, 14],
+                    ['end', 50, 14]
+                ],
+                line: [
+                    ['58c21d713819d56d68763918', '58c21d803819d56d68763919'],
+                    ['58c21d803819d56d68763919', '58c21da83819d56d6876391a'],
+                    ['58c21da83819d56d6876391a', '58c63ecf3819d5a22f2c7f2e14'],
+                    ['58c63ecf3819d5a22f2c7f2e14', '58c63ecf3819d5a22f2c7fwqe24']
                 ]
-            },
-            tableType: [
-                {
-                    prop: 'id',
-                    label: '编号',
-                    width: 50
-                },
-                {
-                    prop: 'name',
-                    label: '内容'
-                },
-                {
-                    prop: 'score',
-                    label: '分数',
-                    width: 100
-                },
-                {
-                    prop: 'createTime',
-                    label: '创建时间',
-                    sortable: true
-                }
-            ],
-            activeName: 'first'
+            }
         }
     },
     methods: {
-        changeItem(value) {
-            this.items.forEach(item => {
-                if (item.id == value) {
-                    this.form.name = item.name
-                    this.form.score = item.score
-                    return
+        createFlow(flowData) {
+            console.log('Index created')
+            const color = '#acd'
+            const instance = jsPlumb.getInstance({
+                Connector: ['Flowchart', {}]
+            })
+            console.log(instance)
+
+            // suspend drawing and initialise.
+            instance.batch(() => {
+                // declare some common values:
+                const arrowCommon = { foldback: 0.7, width: 12 }
+                // use three-arg spec to create two different arrows with the common values:
+                const overlays = [
+                    ['Arrow', { location: 0.7 }, arrowCommon]
+                    // ['Label', { label: 'custom label', id: 'label' }]
+                ]
+                // init point
+                for (const point of flowData.point) {
+                    $('.points').append(
+                        `<div id="${point._id}" class="point chart_act_${point.status} ${
+                            point.name
+                        }">${point.name}</div>`
+                    )
+                    console.log(point.anchor)
+                    let pa = {
+                        uuid: `${point._id}-bottom`,
+                        anchor: 'Right',
+                        maxConnections: -1
+                    }
+                    instance.addEndpoint(
+                        point._id,
+                        {
+                            uuid: `${point._id}-Right`,
+                            anchor: 'Right',
+                            maxConnections: -1
+                        },
+                        {
+                            isSource: true,
+                            isTarget: true,
+                            dragAllowedWhenFull: true
+                        }
+                    )
+                    instance.addEndpoint(
+                        point._id,
+                        {
+                            uuid: `${point._id}-left`,
+                            anchor: 'Left',
+                            maxConnections: -1
+                            // connectorStyle: { stroke: 'gray' },
+                        },
+                        {
+                            isSource: true,
+                            isTarget: true,
+                            dragAllowedWhenFull: true
+                        }
+                    )
+                }
+                // init transition
+                for (const i of flowData.line) {
+                    const uuid = [`${i[0]}-Right`, `${i[1]}-left`]
+                    instance.connect({
+                        uuids: uuid,
+                        overlays
+                    })
+                }
+                // init location
+                for (const i of flowData.location) {
+                    $(`.${i[0]}`).css('left', i[1] * 20)
+                    $(`.${i[0]}`).css('top', i[2] * 20)
+                }
+                for (const point of flowData.point) {
+                    instance.draggable(`${point._id}`)
                 }
             })
-        },
-        onSubmit() {
-            if (this.form.name == '') {
-                this.$message.error('缺少描述')
-                return
-            }
-            // console.log(this.form)
-            this.$http.post('http://localhost:8088/api/goal/add', this.form).then(response => {
-                if (response.body.code == 0) {
-                    this.$message('添加成功')
-                    this.$refs.table.refresh()
-                    this._getScore()
-                }
-            })
-        },
-        _getItems() {
-            this.$http.get('http://localhost:8088/api/goal/items').then(response => {
-                if (response.body.code == 0) {
-                    // console.log(response.body.data)
-                    this.items = response.body.data
-                }
-            })
-        },
-        _getScore() {
-            this.$http.get('http://localhost:8088/api/goal/score').then(response => {
-                if (response.body.code == 0) {
-                    // console.log(response.body.data)
-                    this.score = response.body.data
-                }
-            })
+            jsPlumb.fire('jsPlumbDemoLoaded', instance)
         }
     },
     mounted() {
-        this._getScore()
-        this._getItems()
-    },
-    computed: {},
-    components: { DisplayTable }
+        jsPlumb.ready(() => {
+            this.createFlow(this.data)
+        })
+    }
 }
 </script>
 
-<style scoped>
+<style>
+    .point.chart_act_0 {
+        color: #9cc;
+    }
+    .point.chart_act_1 {
+        color: #fac;
+    }
 </style>
