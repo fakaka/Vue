@@ -1,3 +1,0 @@
-export const SET_SINGER = 'SET_SINGER'
-
-export const SET_FAVORITE_LIST = 'SET_FAVORITE_LIST'
